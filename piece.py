@@ -5,6 +5,7 @@ class piece():
         self.row = row
         self.col = col
         self.color = color
+        self.king = False
         self.find_coord()
     
     def make_king(self):
@@ -12,11 +13,11 @@ class piece():
         self.color = gold
     
     def find_coord(self):
-        self.x = int(square_size(self.row - 0.5))
-        self.y = int(square_size(self.col - 0.5))
+        self.x = int(square_size*(self.col + 0.5))
+        self.y = int(square_size*(self.row + 0.5))
     
     def draw(self):
-        radius = square_size - 10
+        radius = square_size//2 - 10
         if self.king:
             pygame.draw.circle(disp, self.color, (self.x, self.y), radius)
         else:
