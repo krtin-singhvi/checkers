@@ -58,7 +58,6 @@ class Select():
                self.selected = clicked_square
                Select.highlight(row, col)
 
-
         elif isinstance(self.selected, Piece):
             Select.clear(self.selected.row, self.selected.col)
             if clicked_square == 0 and (row + col)%2 != 0:
@@ -67,15 +66,6 @@ class Select():
             elif clicked_square != 0:
                 Select.highlight(clicked_square.row, clicked_square.col)
                 self.selected = clicked_square
-
-
-        elif isinstance(self.selected, tuple):
-            r, c = self.selected
-            Select.clear(r, c)
-            if clicked_square != 0:
-                self.selected = clicked_square
-            else:
-                self.selected = (row,col)
 
     def new_method(self, row, col):
         Select.highlight(row, col)             
