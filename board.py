@@ -65,13 +65,9 @@ class Select():
                 self.selected = None
             elif clicked_square != 0:
                 Select.highlight(clicked_square.row, clicked_square.col)
-                self.selected = clicked_square
-
-    def new_method(self, row, col):
-        Select.highlight(row, col)             
+                self.selected = clicked_square         
 
     def clear(row, col):
-    
         if (col + row)%2 != 0:
             pygame.draw.rect(disp, dark_brown, (square_size*col, square_size*row, square_size, square_size), 5)
         else:
