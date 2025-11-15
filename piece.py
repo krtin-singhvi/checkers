@@ -1,6 +1,6 @@
 import pygame
 from constants import black, red, gold, square_size, screen_size, disp
-class piece():
+class Piece():
     def __init__(self, row, col, color):
         self.row = row
         self.col = col
