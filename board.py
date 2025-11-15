@@ -68,10 +68,7 @@ class Select():
                 self.selected = clicked_square         
 
     def clear(row, col):
-        if (col + row)%2 != 0:
             pygame.draw.rect(disp, dark_brown, (square_size*col, square_size*row, square_size, square_size), 5)
-        else:
-            pygame.draw.rect(disp, light_brown, (square_size*col, square_size*row, square_size, square_size), 5)
     
     def highlight(row, col):
         pygame.draw.rect(disp, (0,255,0), (square_size*col, square_size*row, square_size, square_size), 5)
