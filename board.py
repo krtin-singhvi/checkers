@@ -21,8 +21,6 @@ class Board:
                     self.grid[i][j] = Piece("black") 
                 elif (i +j)%2 != 0 and i>ROWS//2:
                     self.grid[i][j] = Piece("red")    
-                # else:
-                #     self.grid[i][j] = None 
 
     def draw_squares(self, window):
         # draw 8x8 alternating light/dark squares
@@ -36,7 +34,7 @@ class Board:
         
 
     def draw_pieces(self, window):
-        # loop through grid; if there is a piece, tell it to draw itself
+        # loop through grid, and draw pieces according to grid
         for i in range(ROWS):
             for j in range(COLS):
                 piece = self.grid[i][j]
