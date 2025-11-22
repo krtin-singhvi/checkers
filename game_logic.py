@@ -7,30 +7,26 @@ class Game:
         # store the board
         self.board = board
 
-        # whose turn ("red" or "black")
         self.turn = "red"
 
         # currently selected piece (row, col)
         self.selected = None
 
-        # valid moves of the selected piece:
-        # format: { (r,c): [ (cap_r, cap_c), ... ] }
+        # store valid moves of selected piece in a dictionary
         self.valid_moves = {}
 
-        # winner ("red", "black", or None)
         self.winner = None
 
-    # --- utilities for forced captures ---
     def piece_has_capture(self, row, col):
-        """Return True if piece at (row,col) has any capture move."""
+        #return true if piece at (row,col) has any capture move
         moves = self.get_valid_moves_for(row, col)
         for caps in moves.values():
-            if caps:  # non-empty captured list -> capture move
+            if caps: # empty list evaluates to false
                 return True
         return False
 
     def any_capture_for_player(self):
-        """Return True if current player has any capture available anywhere."""
+        #return true if current player has any capture available anywhere
         for r in range(ROWS):
             for c in range(COLS):
                 p = self.board.grid[r][c]
@@ -43,7 +39,7 @@ class Game:
         piece = self.board.grid[row][col]
 
         if piece is not None and piece.color == self.turn:
-            # if there is a capture anywhere, only allow selecting pieces that can capture
+            # if there is a capture anywhere, and the selected piece also has capture available
             if self.any_capture_for_player() and not self.piece_has_capture(row, col):
                 return False
 
@@ -51,18 +47,18 @@ class Game:
             self.valid_moves = self.get_valid_moves_for(row, col)
             return True
 
-        # If selecting an empty square that is a valid move, attempt to move
+        # if selecting an empty square that is a valid move, attempt to move
         if self.selected is not None and (row, col) in self.valid_moves:
-            # if capture exists anywhere, this move MUST be a capture
+            # if capture exists anywhere, this move must be a capture
             caps = self.valid_moves.get((row, col), [])
             if self.any_capture_for_player() and not caps:
                 return False
 
-            # apply move; returns True if the same piece must continue capturing
-            continue_chain = self.apply_move(self.selected, (row, col))
+            # apply move, returns true if the same piece must continue capturing
+            continue_capture = self.apply_move(self.selected, (row, col))
 
-            if continue_chain:
-                # keep selected on the landing square, update valid moves to only capture moves
+            if continue_capture:
+                #keep selected on the landing square, update valid moves to only capture moves
                 er, ec = (row, col)
                 self.selected = (er, ec)
 
@@ -70,7 +66,7 @@ class Game:
                 # keep only capture moves
                 self.valid_moves = {m: caps for m, caps in all_moves.items() if caps}
             else:
-                # done, switch turn
+                #switch turn
                 self.selected = None
                 self.valid_moves = {}
                 self.switch_turn()
@@ -93,7 +89,7 @@ class Game:
         
         if piece.color != self.turn:
             return moves
-        
+        #assigns movement directions based on piece type
         if piece.king:
             directions = [(1,1),(1,-1),(-1,1),(-1,-1)]
         else:
@@ -125,14 +121,14 @@ class Game:
     def apply_move(self, start, end):
         sr, sc = start
         er, ec = end
-
-        #get piece
+        
         piece = self.board.grid[sr][sc]
         
-        #move the piece on the bord
+        
         if piece is None:
             return False
-        
+            
+        #move the piece
         self.board.grid[sr][sc] = None
         self.board.grid[er][ec] = piece
 
@@ -141,14 +137,14 @@ class Game:
         for (cr, cc) in captured:
             self.board.grid[cr][cc] = None
 
-        # kinging a piece
+        # promoting to king
         if not piece.king:
             if piece.color == "red" and er == 0:
                 piece.make_king()
             elif piece.color == "black" and er == ROWS - 1:
                 piece.make_king()
 
-        # After a capture, check if the same piece can capture again
+        # after a capture, check if the same piece can capture again
         if captured:
             next_moves = self.get_valid_moves_for(er, ec)
             for caps in next_moves.values():
@@ -167,7 +163,7 @@ class Game:
             self.turn = "red"
 
     def check_winner(self):
-        # count pieces
+        #count pieces
         red_count = 0
         black_count = 0
         for r in range(ROWS):
@@ -186,7 +182,7 @@ class Game:
             self.winner = "red"
             return
         
-        # check if current player has moves
+        #check if current player has moves
         for r in range(ROWS):
             for c in range(COLS):
                 p = self.board.grid[r][c]
