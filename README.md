@@ -176,12 +176,9 @@ gui.py             # Interface of the game
                   -> Upgrades the piece to a King when it reaches the last row opponent’s side of the board, allowing it to move backwards.
       
                   3) draw(self, window, x, y, radius):
-                      Parameters:
                       window → The Pygame display surface to draw on.
                       x, y → Screen coordinates (pixel position) where the piece should appear.
                       radius → Size of the checker piece.
-      
-                      How it works:
                       ->Selects the correct color based on self.color .
                       ->Draws the main filled circle of the checker.
                       ->If the piece is a king, it draws a gold ring around it to visually show this.
@@ -244,11 +241,11 @@ gui.py             # Interface of the game
                   
                   6) draw_selected(window, selected):
                   -> Highlights the currently selected piece, if any.
-                  → Draw turn text.
+                  -> Draw turn text.
                   -> Creates a small font.
                   -> Renders text like: “Turn: red” or “Turn: black”.
                   -> Displays it at the top-left corner.
-                  → Draw winner text.
+                  -> Draw winner text.
                   -> If game.winner is not None, then it uses a bigger font and renders “RED WINS” or “BLACK WINS” and centers it on the window.
 
 # file_manager.py
