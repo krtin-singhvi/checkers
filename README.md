@@ -95,7 +95,7 @@ gui.py             # Interface of the game
 
 # Explanation of all files :
 
-    # main.py :
+# main.py :
     * This is the file through which the game is played and hence we need to call it in the terminal. 
     
     # Initialization :
@@ -139,7 +139,7 @@ gui.py             # Interface of the game
             4)Displays dialog boxes on top when required.Rendering is updated every frame using pygame.display.flip(), and the clock ensures the game runs at the specified frames per second.
     # Saving and Exiting
         When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
-    # piece.py
+# piece.py
             1) __init__(self, color):
             -> init is a constructor.
             -> It creates a new checker piece.
