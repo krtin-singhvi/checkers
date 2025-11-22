@@ -21,18 +21,18 @@ class Board:
                     self.grid[i][j] = Piece("black") 
                 elif (i +j)%2 != 0 and i>ROWS//2:
                     self.grid[i][j] = Piece("red")    
-                else:
-                    self.grid[i][j] = None 
+                # else:
+                #     self.grid[i][j] = None 
 
     def draw_squares(self, window):
         # draw 8x8 alternating light/dark squares
         for i in range(ROWS):
             for j in range(COLS):
-                rect = (j * SQUARE_SIZE, i * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+                square = (j * SQUARE_SIZE, i * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
                 if (i + j)%2 !=0:
-                    pygame.draw.rect(window, DARK_COLOR, rect)
+                    pygame.draw.rect(window, DARK_COLOR, square)
                 else:
-                    pygame.draw.rect(window, LIGHT_COLOR, rect)                 
+                    pygame.draw.rect(window, LIGHT_COLOR, square)                 
         
 
     def draw_pieces(self, window):

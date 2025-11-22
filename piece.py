@@ -16,4 +16,4 @@ class Piece:
             color = BLACK_COLOR
         pygame.draw.circle(window, color, (x,y), radius)
         if self.king:
-            pygame.draw.circle(window, GOLD, (x,y), radius, 3)
+            pygame.draw.circle(window, GOLD, (x,y), radius, 5)
