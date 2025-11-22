@@ -121,7 +121,7 @@ gui.py             # Interface of the game
     
     This dialog must be answered before normal gameplay begins.
     
-   Event Management :
+3. Event Management :
         
         Inside the main loop, the program keeps taking inputs of user while running is True.
 
