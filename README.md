@@ -250,3 +250,47 @@ gui.py             # Interface of the game
                   -> Displays it at the top-left corner.
                   → Draw winner text.
                   -> If game.winner is not None, then it uses a bigger font and renders “RED WINS” or “BLACK WINS” and centers it on the window.
+
+# file_manager.py
+    The file_manager.py module handles saving and loading the full Checkers game state. It stores piece positions, whose turn it is, and whether the game has been won. The data is written to a simple text file (checkers_save.txt), making it easy to restore the game later.
+
+1. Saving the Game
+```
+save_game(game)
+``` 
+    This function writes the current game state into checkers_save.txt.
+    The file stores:
+        Current player's turn
+        Winner (or "None" if the game is still active)
+        Board layout, where each row is represented using characters:
+        r → red piece
+        b → black piece
+        R → red king
+        B → black king
+        - → empty square
+    The board is saved as 8 lines of 8 characters (one per square).
+    Kings are stored in uppercase; regular pieces in lowercase.
+    Example row in the save file:
+```
+-r-b-R--
+```
+
+2. Loading the Game
+```
+load_game(game)
+```
+    This function reads checkers_save.txt and restores:
+        Whose turn it is
+        Whether a winner already exists
+        The entire board configuration
+    Each character in the file is decoded back into a Piece object:
+        Lowercase r / b → normal red/black piece
+        Uppercase R / B → king piece
+        - → empty square
+    After loading: 
+        The board is reconstructed
+        All pieces are placed correctly
+        Kings are reactivated
+        Current turn is restored
+        Selection and valid moves are cleared
+    If the save file does not exist or is corrupted, the loader safely exits without crashing.
