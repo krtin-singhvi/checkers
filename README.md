@@ -217,3 +217,36 @@ gui.py             # Interface of the game
                   5) get_square(self, x, y):
                   -> Converts pixel positions (from mouse click) into Grid Coordinates.
                   -> Uses integer division to figure out which square was clicked.
+
+      
+# gui.py
+
+                  1) inside_board(row, col):
+                  -> Checks whether a given (row, col) is inside the 8×8 board.
+                  -> Returns True if the position is valid, otherwise False.
+                  
+                  2) pos_to_pixel_center(row, col):
+                  -> Converts a board grid position to pixel coordinates.
+                  -> Returns the center (x, y) of that square.
+                  -> Useful for drawing pieces exactly in the middle.
+                  
+                  3) draw_selected(window, selected):
+                  -> Draws a highlight box around the selected square.
+                  -> selected contains (row, col) of the chosen piece.
+                  -> Only draws the outline; does nothing if selected = None.
+                  
+                  4) draw(window, board, selected, valid_moves, game):
+                  -> Main GUI drawing function.
+                  -> Updates everything visible on the screen each frame.
+                  
+                  5) board.draw(window):
+                  -> Tells the Board class to draw checkerboard squares and checker pieces.
+                  
+                  6) draw_selected(window, selected):
+                  -> Highlights the currently selected piece, if any.
+                  → Draw turn text.
+                  -> Creates a small font.
+                  -> Renders text like: “Turn: red” or “Turn: black”.
+                  -> Displays it at the top-left corner.
+                  → Draw winner text.
+                  -> If game.winner is not None, then it uses a bigger font and renders “RED WINS” or “BLACK WINS” and centers it on the window.
