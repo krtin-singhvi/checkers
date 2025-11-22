@@ -80,13 +80,16 @@ python main.py
 
 ```
 checkers/
-│
-├── main.py            # Game loop
-├── board.py           # Board class (movement, saving, loading)
-├── piece.py           # Piece class (movement, king logic)
-├── constants.py       # Colors, sizes, board settings
-├── savegame.txt       # Auto-generated save file
-└── README.md
+
+main.py            # Game loop <br>
+board.py           # Board class (movement, saving, loading) <br>
+piece.py           # Piece class (movement, king logic) <br>
+constants.py       # Colors, sizes, board settings <br>
+file_manager.py    # Auto-generated save file <br>
+checkers_save.txt  # Saving game progress as a text file <br>
+game_logic.py      # Logic of the game <br>
+gui.py             # Interface of the game <br>
+README.md
 ```
 
 ---
