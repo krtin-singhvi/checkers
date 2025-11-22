@@ -96,7 +96,7 @@ gui.py             # Interface of the game
 # Explanation of all files :
 
 # main.py :
-    * This is the file through which the game is played and hence we need to call it in the terminal. 
+      This is the file through which the game is played and hence we need to call it in the terminal. 
     
    Initialization :
         
