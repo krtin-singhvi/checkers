@@ -165,53 +165,53 @@ gui.py             # Interface of the game
 
          When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
 # piece.py
-            1) __init__(self, color):
-            -> init is a constructor.
-            -> It creates a new checker piece.
-            -> It assigns a variable color.
-            -> It assigns king → False by default (regular piece).
-            -> Color will contain of piece either "black" or "red".
-
-            2) make_king(self):
-            -> Upgrades the piece to a King when it reaches the last row opponent’s side of the board, allowing it to move backwards.
-
-            3) draw(self, window, x, y, radius):
-                Parameters:
-                window → The Pygame display surface to draw on.
-                x, y → Screen coordinates (pixel position) where the piece should appear.
-                radius → Size of the checker piece.
-
-                How it works:
-                ->Selects the correct color based on self.color .
-                ->Draws the main filled circle of the checker.
-                ->If the piece is a king, it draws a gold ring around it to visually show this.
+                  1) __init__(self, color):
+                  -> init is a constructor.
+                  -> It creates a new checker piece.
+                  -> It assigns a variable color.
+                  -> It assigns king → False by default (regular piece).
+                  -> Color will contain of piece either "black" or "red".
+      
+                  2) make_king(self):
+                  -> Upgrades the piece to a King when it reaches the last row opponent’s side of the board, allowing it to move backwards.
+      
+                  3) draw(self, window, x, y, radius):
+                      Parameters:
+                      window → The Pygame display surface to draw on.
+                      x, y → Screen coordinates (pixel position) where the piece should appear.
+                      radius → Size of the checker piece.
+      
+                      How it works:
+                      ->Selects the correct color based on self.color .
+                      ->Draws the main filled circle of the checker.
+                      ->If the piece is a king, it draws a gold ring around it to visually show this.
 
 # board.py
 
                   This file manages the checkerboard, including the 8×8 grid where pieces are placed drawing the board and the pieces converting mouse clicks into board positions. Here, class "Board" is created which manages entire board.
                   
-                   1)__init__(self):
+                  1) __init__(self):
                   -> Creates an 8×8 matrix (list of lists) , every square starts with None, meaning there is no piece placed yet.
                   -> self.grid[row][col] will later store either None or a Piece object (red/black).
                   
-                  2)setup(self):
+                  2) setup(self):
                   -> Placement of Initial Pieces.
                   -> Places checkers on dark squares only ((i + j) % 2 != 0).
                   -> Black pieces are placed on the top 3 rows.
                   -> Red pieces are placed on the bottom 3 rows.
                   -> Matches standard Checkers rules and initializes the board for a new game.
                   
-                  3)draw_squares(self, window):
+                  3) draw_squares(self, window):
                   -> Filling 8×8 grid of alternating light and dark squares.
                   -> Each square is drawn as a rectangle.
                   -> The color depends on whether (i + j) is even or odd.
                   
-                  4)draw_pieces(self, window):
+                  4) draw_pieces(self, window):
                   -> Drawing all pieces (circles) if they are not None.
                   -> Calls the piece’s own draw method to render it.
                   -> This displays every checker in the correct board location.
                   
-                  6)draw(self, window):
+                  6) draw(self, window):
                   -> Draw Entire Board
                   
                   5) get_square(self, x, y):
