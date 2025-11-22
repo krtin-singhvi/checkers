@@ -113,9 +113,9 @@ gui.py             # Interface of the game
          When the program starts, it checks if a previous save file (checkers_save.txt) exists.
     
          If it does, a startup dialog appears asking the player:
-              ```
-              "Previous save found — Load it? (Y/N)"
-              ```
+```
+"Previous save found — Load it? (Y/N)"
+```
          Press Y → Loads the saved game state
          Press N → Starts a new game
     
@@ -130,7 +130,9 @@ gui.py             # Interface of the game
 
         b. Quit Confirmation Dialog
             When the user attempts to close the window, the game displays:
-                "Save game before quitting?"
+   ```
+   "Save game before quitting?"
+   ```
                 Y : Save and quit  
                 N : Quit without saving  
                 ESC : Cancel and return to game  
