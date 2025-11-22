@@ -110,16 +110,16 @@ gui.py             # Interface of the game
 
 2. Save/Load Startup Check
     
-   When the program starts, it checks if a previous save file (checkers_save.txt) exists.
+         When the program starts, it checks if a previous save file (checkers_save.txt) exists.
     
-    If it does, a startup dialog appears asking the player:
-        ```
-        "Previous save found — Load it? (Y/N)"
-        ```
-        Press Y → Loads the saved game state
-        Press N → Starts a new game
+         If it does, a startup dialog appears asking the player:
+              ```
+              "Previous save found — Load it? (Y/N)"
+              ```
+         Press Y → Loads the saved game state
+         Press N → Starts a new game
     
-    This dialog must be answered before normal gameplay begins.
+         This dialog must be answered before normal gameplay begins.
     
 3. Event Management :
         
@@ -143,15 +143,16 @@ gui.py             # Interface of the game
             Window close : Trigger quit confirmation dialog and exit game.
             The mouse position is converted into board coordinates using board.get_square() and passed to game.select() to perform selection, movement, and capturing logic.
 
-   Graphics
+4. Graphics
         
         Each frame, the game:
             1)Clears the screen
             2)Draws the board and all pieces
             3)Highlights selected pieces and valid moves (via gui.draw())
             4)Displays dialog boxes on top when required.Rendering is updated every frame using pygame.display.flip(), and the clock ensures the game runs at the specified frames per second.
-    # Saving and Exiting
-        When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
+5. Saving and Exiting
+
+         When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
 # piece.py
             1) __init__(self, color):
             -> init is a constructor.
