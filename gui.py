@@ -1,5 +1,3 @@
-# gui.py
-
 import pygame
 from constants import *
 
