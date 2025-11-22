@@ -34,7 +34,16 @@ The game uses a custom text-based format (not JSON) for saving progress.
 Example save file:
 
 ```
-
+red
+None
+---b-b-b
+b---b-b-
+-----b-b
+----b---
+--------
+----r-r-
+---r-r-r
+r-B-r-r-
 ```
 
 Saved data includes:
@@ -130,9 +139,9 @@ gui.py             # Interface of the game
 
         b. Quit Confirmation Dialog
             When the user attempts to close the window, the game displays:
-   ```
-   "Save game before quitting?"
-   ```
+```
+"Save game before quitting?"
+```
                 Y : Save and quit  
                 N : Quit without saving  
                 ESC : Cancel and return to game  
