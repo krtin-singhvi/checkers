@@ -1,6 +1,3 @@
-# This file stores numbers and colors so the rest of the game can use them.
-
-
 # Window width and height
 WINDOW_WIDTH = 720
 WINDOW_HEIGHT = 720
