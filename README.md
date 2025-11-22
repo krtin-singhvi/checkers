@@ -104,66 +104,31 @@ gui.py             # Interface of the game
 
 # Explanation of all files :
 
-# main.py :
-      This is the file through which the game is played and hence we need to call it in the terminal. 
+# main.py
+      1. Game Initialization
+          Starts Pygame and creates the game window
+          Creates the Board and Game objects
+          Automatically checks if a previous save file exists
+      2. Dialog Management
+            Displays two types of popup dialogs:
+                  Startup dialog → “Load previous save? (Y/N)”
+                  Quit dialog → “Save before quitting? (Y/N/ESC)”
+                  These dialogs pause normal gameplay until answered.
+      3. Input Handling
+          Handles mouse clicks to select and move pieces
+          Detects window close events
+          Allows manual loading using the L key
+          Enforces turn logic and prevents actions when the game is won
+      4. Rendering
+          Continuously draws:
+              The board
+              Pieces
+              Highlights (via gui.draw())
+              Dialog overlays when required
+      5. Game Loop & Shutdown
+          Runs the main loop at a fixed FPS, updates the display every frame, and cleanly exits when the user quits.
     
-   1. Initialization :
-
-    The program begins by importing required modules such as Pygame, system utilities, and the project files (Board, Game, gui, file_manager).
-    It then:
-        Initializes Pygame
-        Creates the game window
-        Sets the window caption
-        Prepares a clock to control the game’s frame rate
-    The board is created and filled with the standard checkers starting layout, and the Game class is initialized to manage turn logic, movement, and win detection.
-
-2. Save/Load Startup Check
-    
-         When the program starts, it checks if a previous save file (checkers_save.txt) exists.
-    
-         If it does, a startup dialog appears asking the player:
-```
-"Previous save found — Load it? (Y/N)"
-```
-         Press Y → Loads the saved game state
-         Press N → Starts a new game
-    
-         This dialog must be answered before normal gameplay begins.
-    
-3. Event Management :
-        
-        Inside the main loop, the program keeps taking inputs of user while running is True.
-
-        a. Startup Dialog Handling:
-            It blocks all input until the start-up dialogue is answered.
-
-        b. Quit Confirmation Dialog
-            When the user attempts to close the window, the game displays:
-```
-"Save game before quitting?"
-```
-                Y : Save and quit  
-                N : Quit without saving  
-                ESC : Cancel and return to game  
-            running=False after this and the programs tops via pygame.quit()
-        
-        c. Normal Gameplay Input
-        Once dialogs are cleared, the game accepts normal input:
-            Mouse click : To make a move
-            Keyboard ‘L’ : Manually load the save file
-            Window close : Trigger quit confirmation dialog and exit game.
-            The mouse position is converted into board coordinates using board.get_square() and passed to game.select() to perform selection, movement, and capturing logic.
-
-4. Graphics
-        
-        Each frame, the game:
-            1)Clears the screen
-            2)Draws the board and all pieces
-            3)Highlights selected pieces and valid moves (via gui.draw())
-            4)Displays dialog boxes on top when required.Rendering is updated every frame using pygame.display.flip(), and the clock ensures the game runs at the specified frames per second.
-5. Saving and Exiting
-
-         When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
+      This file acts as the central controller of the program, connecting gameplay logic, rendering, and the save/load system into one cohesive game loop.
 # piece.py
                   1) __init__(self, color):
                   -> init is a constructor.
@@ -249,45 +214,78 @@ gui.py             # Interface of the game
                   -> If game.winner is not None, then it uses a bigger font and renders “RED WINS” or “BLACK WINS” and centers it on the window.
 
 # file_manager.py
-    The file_manager.py module handles saving and loading the full Checkers game state. It stores piece positions, whose turn it is, and whether the game has been won. The data is written to a simple text file (checkers_save.txt), making it easy to restore the game later.
 
-1. Saving the Game
+    save_game(game) :
+    1)Writes whose turn it is
+        Example: "red" or "black"
+    2)Writes the winner
+        "None" if the game is still ongoing
+        "red" or "black" if someone already won
+    3)Saves the board layout (8×8)
+        Each square becomes a character:
+            - → empty square
+            r → red piece
+            b → black piece
+            R → red king
+            B → black king
+    4)Writes all 8 board rows to the file
+    If everything is successful, it prints:
 ```
-save_game(game)
-``` 
-    This function writes the current game state into checkers_save.txt.
-    The file stores:
-        Current player's turn
-        Winner (or "None" if the game is still active)
-        Board layout, where each row is represented using characters:
-        r → red piece
-        b → black piece
-        R → red king
-        B → black king
-        - → empty square
-    The board is saved as 8 lines of 8 characters (one per square).
-    Kings are stored in uppercase; regular pieces in lowercase.
-    Example row in the save file:
-```
--r-b-R--
+Game Saved!
 ```
 
-2. Loading the Game
+    load_game(game) 
+        1)This function restores a previously saved game from checkers_save.txt.
+        2)What it loads:
+            Turn → sets game.turn
+            Winner → sets game.winner
+            Rebuilds the board:
+                - becomes an empty square
+                r/R creates a red piece (uppercase = king)
+                b/B creates a black piece (uppercase = king)
+            Resets selections and valid moves
+                (selected = None, valid_moves = {})
+    If successful, it prints:
 ```
-load_game(game)
+Game Loaded!
 ```
-    This function reads checkers_save.txt and restores:
-        Whose turn it is
-        Whether a winner already exists
-        The entire board configuration
-    Each character in the file is decoded back into a Piece object:
-        Lowercase r / b → normal red/black piece
-        Uppercase R / B → king piece
-        - → empty square
-    After loading: 
-        The board is reconstructed
-        All pieces are placed correctly
-        Kings are reactivated
-        Current turn is restored
-        Selection and valid moves are cleared
-    If the save file does not exist or is corrupted, the loader safely exits without crashing.
+#game_logic.py
+      
+      1. Track Game State
+         The class stores:
+              The board
+              Whose turn it is (red or black)
+              The currently selected piece
+              All valid moves for that piece
+              The winner (or None if the game is ongoing)
+      2. Enforce Mandatory Capture
+          Checkers requires players to capture if possible.
+          This is handled by:
+              piece_has_capture() – checks if a specific piece can capture
+              any_capture_for_player() – checks if the current player must capture
+          If a capture exists, only capturing pieces and capturing moves are allowed.
+      3. Piece Selection and Movement
+          select(row, col) handles both selecting a piece and moving it:
+              Clicking your own piece selects it
+              Clicking a valid square moves the piece
+              Moves that are not allowed are ignored
+              Multi-capture chains are enforced automatically
+      4. Move Generation
+          get_valid_moves_for(row, col) calculates all legal moves for a piece:
+              Normal diagonal moves
+              Capture moves over opponents
+              King movement in all directions
+          Returns a dictionary with destination squares and captured pieces.
+      5. Applying Moves
+          apply_move(start, end):
+              Moves the piece on the board
+              Removes any captured opponents
+              Promotes the piece to king if it reaches the opposite end
+              Checks for additional captures (forcing chain captures)
+      6. Switching Turns
+          After a valid move (unless a chain capture continues),switch_turn() changes the active player.
+      7. Determining the Winner
+          check_winner() checks:
+            If one color has no pieces left
+            Or if the current player has no valid moves
+          If so, the opponent is declared the winner.
