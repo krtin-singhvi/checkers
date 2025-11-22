@@ -4,6 +4,21 @@ from piece import Piece
 
 SAVE_FILE = "checkers_save.txt"
 
+''' save game in the format
+red (current turn)
+None (winner)(if any)
+---R----
+-b------
+----b--R
+--------
+--------
+--r-----
+--------
+r------B
+(the above given board is just an example)
+r = red piece , R = red king
+b = black piece, B = black king
+'''
 def save_game(game):
     with open(SAVE_FILE, "w") as f:
         f.write(f"{game.turn}\n")
@@ -24,7 +39,8 @@ def save_game(game):
                     row_str += char
             f.write(f"{row_str}\n")
     print("Game Saved!")
-
+    
+#load game through checkers_save.txt file
 def load_game(game):
     if not os.path.exists(SAVE_FILE):
         print("No save file found.")
@@ -35,7 +51,6 @@ def load_game(game):
         lines = f.readlines()
 
     lines = [line.strip() for line in lines]
-    if len(lines) < 10: return
 
     game.turn = lines[0]
     if lines[1] == "None":
@@ -43,7 +58,7 @@ def load_game(game):
     else:
         game.winner = lines[1]
 
-    # Reset grid and load pieces
+    # reset grid and update to old state
     for r in range(ROWS):
         row_data = lines[r + 2]
         for c in range(COLS):
@@ -57,7 +72,7 @@ def load_game(game):
                     new_piece.make_king()
                 game.board.grid[r][c] = new_piece
     
-    # Clear selection
+    # clear selection
     game.selected = None
     game.valid_moves = {}
     print("Game Loaded!")
