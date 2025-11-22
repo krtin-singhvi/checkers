@@ -89,7 +89,6 @@ file_manager.py    # Auto-generated save file
 checkers_save.txt  # Saving game progress as a text file
 game_logic.py      # Logic of the game
 gui.py             # Interface of the game
-README.md
 ```
 
 ---
