@@ -1,8 +1,10 @@
-# Checkers Game Project (Python + Pygame)
+# Checkers Game (Python + Pygame)
 
-A classic Checkers game implemented in Python using Pygame. This project features smooth gameplay, piece movement rules, king promotion, capturing logic, and a safe file I/O system for saving and loading game state.
+A classic Checkers game implemented in **Python** using **Pygame**. This project features smooth gameplay, piece movement rules, king promotion, capturing logic, and a safe file I/O system for saving and loading game state.
 
-# Features
+---
+
+## Features
 
 * 8×8 checkers board using dark squares
 * Turn-based gameplay (Red vs. Black)
@@ -10,67 +12,84 @@ A classic Checkers game implemented in Python using Pygame. This project feature
 * Mandatory capturing rules
 * Multi-jump support
 * King promotion
-* Safe and simple Save/Load system (text-based)
+* Safe and simple **Save/Load system** (text-based)
 * Clean and modular object-oriented structure
-* Error-proof file loading
-
-# Controls
-
-| Key                  | Action                           |
-| -------------------- | -----------------------------    |
-| **Left Mouse Click** | Select and move pieces           |
-| **Y**                | Save game to `file_manager.py`   |
-| **L**                | Load game from `file_manager.py` |
-| **N**                | Quit the game                    |
+* Error-proof file loading (no crashes)
 
 ---
 
-# Save/Load System (Text-Based)
+## Controls
 
-The game uses a custom text-based format for saving progress.
+| Key                  | Action                        |
+| -------------------- | ----------------------------- |
+| **Left Mouse Click** | Select and move pieces        |
+| **Y**                | Save game to `savegame.txt`   |
+| **N**                | Quit the game                 |
+
+---
+
+## Save/Load System (Text-Based)
+
+The game uses a custom text-based format (not JSON) for saving progress.
 Example save file:
 
 ```
-BOARD 8
-TURN red
-PIECE 2 1 red 0
-PIECE 5 0 black 1
-END
+
 ```
 
 Saved data includes:
-    Board size
-    Current player's turn
-    All pieces (row, col, color, king-status)
 
-# Game Rules
+* Board size
+* Current player's turn
+* All pieces (row, col, color, king-status)
 
-1)The game is played on an 8×8 board using only dark squares.
-2)Each player begins with 12 pieces.
-3)Normal pieces move diagonally forward.
-4)Capturing is mandatory.
-5)Multi-captures must continue until no further captures exist.
-6)Reaching the opponent's back row crowns a piece making into a King, which can move backward as well in its diagonal.
-7)The game ends when one player has no legal moves or no pieces left.
+The save/load system prevents crashes even if the file is corrupted.
 
-# Installation
-On your terminal, if not pre-installed pygame:
+---
 
-1. Install Pygame by giving the command pip install pygame on your terminal.
-2. Run the game by giving the command python main.py on your terminal.
+## Game Rules (Short Version)
 
-# Project Structure
+* The game is played on an 8×8 board using dark squares.
+* Each player begins with 12 pieces.
+* Normal pieces move diagonally **forward**.
+* Capturing is **mandatory**.
+* Multi-captures must continue until no further captures exist.
+* Reaching the opponent's back row crowns a **King**, which can move backward.
+* The game ends when one player has no legal moves or no pieces left.
 
+---
+
+## Installation
+
+1. Install Python 3.x.
+2. Install Pygame:
+
+```
+pip install pygame
+```
+
+3. Run the game:
+
+```
+python main.py
+```
+
+---
+
+## Project Structure
+
+```
 checkers/
+│
+├── main.py            # Game loop
+├── board.py           # Board class (movement, saving, loading)
+├── piece.py           # Piece class (movement, king logic)
+├── constants.py       # Colors, sizes, board settings
+├── savegame.txt       # Auto-generated save file
+└── README.md
+```
 
-main.py            # Game loop 
-board.py           # Board class (movement, saving, loading)
-piece.py           # Piece class (movement, king logic)
-constants.py       # Colors, sizes, board settings
-file_manager.py    # Auto-generated save file
-
-README.md
-
+---
 
 # Explanation of all files :
 
