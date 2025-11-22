@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 
+#stores an individual checker piece data and draws it
 class Piece:
     def __init__(self, color):
         self.color = color
