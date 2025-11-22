@@ -163,3 +163,34 @@ gui.py             # Interface of the game
                 ->Draws the main filled circle of the checker.
                 ->If the piece is a king, it draws a gold ring around it to visually show this.
 
+# board.py
+
+                  This file manages the checkerboard, including the 8×8 grid where pieces are placed drawing the board and the pieces converting mouse clicks into board positions. Here, class "Board" is created which manages entire board.
+                  
+                  1) __init__(self):
+                  -> Creates an 8×8 matrix (list of lists) , every square starts with None, meaning there is no piece placed yet.
+                  -> self.grid[row][col] will later store either None or a Piece object (red/black).
+                  
+                  2) setup(self):
+                  -> Placement of Initial Pieces.
+                  -> Places checkers on dark squares only ((i + j) % 2 != 0).
+                  -> Black pieces are placed on the top 3 rows.
+                  -> Red pieces are placed on the bottom 3 rows.
+                  -> Matches standard Checkers rules and initializes the board for a new game.
+                  
+                  3) draw_squares(self, window):
+                  -> Filling 8×8 grid of alternating light and dark squares.
+                  -> Each square is drawn as a rectangle.
+                  -> The color depends on whether (i + j) is even or odd.
+                  
+                  4) draw_pieces(self, window):
+                  -> Drawing all pieces (circles) if they are not None.
+                  -> Calls the piece’s own draw method to render it.
+                  -> This displays every checker in the correct board location.
+                  
+                  5) draw(self, window):
+                  -> Draw Entire Board
+                  
+                  6) get_square(self, x, y):
+                  -> Converts pixel positions (from mouse click) into Grid Coordinates.
+                  -> Uses integer division to figure out which square was clicked.
