@@ -8,7 +8,7 @@ from board import Board
 from game_logic import Game
 import gui
 import file_manager
-
+from pygame.locals import *
 pygame.init()
 disp = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Checkers")
