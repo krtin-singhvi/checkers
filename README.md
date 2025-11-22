@@ -167,30 +167,30 @@ gui.py             # Interface of the game
 
                   This file manages the checkerboard, including the 8×8 grid where pieces are placed drawing the board and the pieces converting mouse clicks into board positions. Here, class "Board" is created which manages entire board.
                   
-                   -__init__(self):
+                   1)__init__(self):
                   -> Creates an 8×8 matrix (list of lists) , every square starts with None, meaning there is no piece placed yet.
                   -> self.grid[row][col] will later store either None or a Piece object (red/black).
                   
-                  - setup(self):
+                  2)setup(self):
                   -> Placement of Initial Pieces.
                   -> Places checkers on dark squares only ((i + j) % 2 != 0).
                   -> Black pieces are placed on the top 3 rows.
                   -> Red pieces are placed on the bottom 3 rows.
                   -> Matches standard Checkers rules and initializes the board for a new game.
                   
-                  - draw_squares(self, window):
+                  3)draw_squares(self, window):
                   -> Filling 8×8 grid of alternating light and dark squares.
                   -> Each square is drawn as a rectangle.
                   -> The color depends on whether (i + j) is even or odd.
                   
-                  - draw_pieces(self, window):
+                  4)draw_pieces(self, window):
                   -> Drawing all pieces (circles) if they are not None.
                   -> Calls the piece’s own draw method to render it.
                   -> This displays every checker in the correct board location.
                   
-                  - draw(self, window):
+                  6)draw(self, window):
                   -> Draw Entire Board
                   
-                  - get_square(self, x, y):
+                  5) get_square(self, x, y):
                   -> Converts pixel positions (from mouse click) into Grid Coordinates.
                   -> Uses integer division to figure out which square was clicked.
