@@ -140,3 +140,25 @@ README.md
             4)Displays dialog boxes on top when required.Rendering is updated every frame using pygame.display.flip(), and the clock ensures the game runs at the specified frames per second.
     # Saving and Exiting
         When quitting, the program uses the file_manager module to optionally save the game state. Finally, Pygame is safely shut down and the program exits.
+    # piece.py
+            1) __init__(self, color):
+            -> init is a constructor.
+            -> It creates a new checker piece.
+            -> It assigns a variable color.
+            -> It assigns king → False by default (regular piece).
+            -> Color will contain of piece either "black" or "red".
+
+            2) make_king(self):
+            -> Upgrades the piece to a King when it reaches the last row opponent’s side of the board, allowing it to move backwards.
+
+            3) draw(self, window, x, y, radius):
+                Parameters:
+                window → The Pygame display surface to draw on.
+                x, y → Screen coordinates (pixel position) where the piece should appear.
+                radius → Size of the checker piece.
+
+                How it works:
+                ->Selects the correct color based on self.color .
+                ->Draws the main filled circle of the checker.
+                ->If the piece is a king, it draws a gold ring around it to visually show this.
+
