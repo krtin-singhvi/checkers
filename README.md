@@ -98,7 +98,7 @@ gui.py             # Interface of the game
 # main.py :
     * This is the file through which the game is played and hence we need to call it in the terminal. 
     
-    # Initialization :
+   Initialization :
         
         1) The initial import lines of code import the necessary modules and files such as pygame GUI and the file manager so that we can run the game and keep saving the progress while the game is played.
 
@@ -106,11 +106,12 @@ gui.py             # Interface of the game
 
         3) The board is created and filled with the standard checkers starting layout, and the Game class is initialized to manage turn logic, movement, and win detection.
     
-    # Save/Load Check :
+   Save/Load Check :
         
         When the program starts, it checks if a previous save file (checkers_save.txt) exists. If it does exist then a start-up dialog appears in the game and asks the user whether we want to load the previous game from where we left it. If we enter Y, then we get the previous game restored and ready to play . If we enter N , it starts a new game.
     
-    # Event Management :
+   Event Management :
+        
         Inside the main loop, the program keeps taking inputs of user while running is True.
 
         a. Startup Dialog Handling:
@@ -131,7 +132,8 @@ gui.py             # Interface of the game
             Window close : Trigger quit confirmation dialog and exit game.
             The mouse position is converted into board coordinates using board.get_square() and passed to game.select() to perform selection, movement, and capturing logic.
 
-    # Graphics
+   Graphics
+        
         Each frame, the game:
             1)Clears the screen
             2)Draws the board and all pieces
