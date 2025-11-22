@@ -98,17 +98,28 @@ gui.py             # Interface of the game
 # main.py :
       This is the file through which the game is played and hence we need to call it in the terminal. 
     
-   Initialization :
-        
-        1) The initial import lines of code import the necessary modules and files such as pygame GUI and the file manager so that we can run the game and keep saving the progress while the game is played.
+   1. Initialization :
 
-        2) Pygame is initialized and the window to play the game is opened via pygame.display.set_mode() function and is initialized as an object. The window then gets a caption "Checkers" at its top via pygame.display.set_caption() function. A clock is then set to control the game's frame rate via pygame.time.Clock() function. 
+    The program begins by importing required modules such as Pygame, system utilities, and the project files (Board, Game, gui, file_manager).
+    It then:
+        Initializes Pygame
+        Creates the game window
+        Sets the window caption
+        Prepares a clock to control the game’s frame rate
+    The board is created and filled with the standard checkers starting layout, and the Game class is initialized to manage turn logic, movement, and win detection.
 
-        3) The board is created and filled with the standard checkers starting layout, and the Game class is initialized to manage turn logic, movement, and win detection.
+2. Save/Load Startup Check
     
-   Save/Load Check :
-        
-        When the program starts, it checks if a previous save file (checkers_save.txt) exists. If it does exist then a start-up dialog appears in the game and asks the user whether we want to load the previous game from where we left it. If we enter Y, then we get the previous game restored and ready to play . If we enter N , it starts a new game.
+   When the program starts, it checks if a previous save file (checkers_save.txt) exists.
+    
+    If it does, a startup dialog appears asking the player:
+        ```
+        "Previous save found — Load it? (Y/N)"
+        ```
+        Press Y → Loads the saved game state
+        Press N → Starts a new game
+    
+    This dialog must be answered before normal gameplay begins.
     
    Event Management :
         
