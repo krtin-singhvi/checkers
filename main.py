@@ -25,31 +25,6 @@ else:
 
 show_quit_dialog = False
 
-def draw_dialog_box(window, lines):
-    #draws the dialog box that appears while opening closing
-    overlay = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
-    overlay.set_alpha(128)
-    overlay.fill((0,0,0))
-    window.blit(overlay, (0,0))
-
-    # box dimensions
-    box_w, box_h = 400, 160
-    box_x = (WINDOW_WIDTH - box_w) // 2
-    box_y = (WINDOW_HEIGHT - box_h) // 2
-    
-    # draw Box
-    pygame.draw.rect(window, (255, 255, 255), (box_x, box_y, box_w, box_h))
-    pygame.draw.rect(window, (0, 0, 0), (box_x, box_y, box_w, box_h), 3)
-
-    # draw Text
-    font = pygame.font.SysFont(None, 32)
-    for i, line in enumerate(lines):
-        text_surf = font.render(line, True, (0,0,0))
-        # Center text horizontally in the box
-        text_x = box_x + (box_w - text_surf.get_width()) // 2
-        text_y = box_y + 30 + (i * 40)
-        window.blit(text_surf, (text_x, text_y))
-
 # main loop
 running = True
 while running:
@@ -96,12 +71,12 @@ while running:
 
     # draw overlays on top
     if show_startup_dialog:
-        draw_dialog_box(disp, [
+        gui.draw_dialog_box(disp, [
             "Previous save found!",
             "Load it? (Y/N)"
         ])
     elif show_quit_dialog:
-        draw_dialog_box(disp, [
+        gui.draw_dialog_box(disp, [
             "Save game before quitting?",
             "Press 'Y' to Save, 'N' to Quit",
             "Press 'ESC' to Cancel"
@@ -112,3 +87,4 @@ while running:
     
 pygame.quit()
 sys.exit()
+
