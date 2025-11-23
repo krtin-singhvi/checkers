@@ -36,7 +36,7 @@ Closing the window shows a quit dialog:
 
 ## Files
 
-* `main.py` – Game loop & dialogs
+* `main.py` – Main game loop
 * `board.py` – Board rendering
 * `piece.py` – Piece & king logic
 * `game_logic.py` – Movement, captures, turn handling
